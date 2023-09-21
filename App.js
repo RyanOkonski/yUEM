@@ -1,7 +1,14 @@
-import LoginScreen from "./app/screens/loginScreen";
+import React from 'react';
+import { View, Text } from 'react-native';
 
-export default function App() {
+function App() {
   return (
-    <LoginScreen />
+    <View>
+        <View>
+            <Text>Oiii</Text>
+        </View>
+    </View>
   );
 }
+
+export default App;
