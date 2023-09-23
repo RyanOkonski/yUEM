@@ -9,7 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "expo": "^49.0.11",
@@ -17,13 +16,6 @@
     "react": "18.2.0",
     "react-native": "0.72.4",
     "expo-linear-gradient": "~12.3.0"
-=======
-    "expo": "^44.0.6",
-    "expo-status-bar": "~1.2.0",
-    "fund": "^1.0.0",
-    "react": "^18.2.0",
-    "react-native": "^0.72.4"
->>>>>>> a5d110699fe4d1d923a0f14f18302bc7630c9b0c
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

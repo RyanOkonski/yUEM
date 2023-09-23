@@ -1,6 +1,5 @@
 {
   "expo": {
-<<<<<<< HEAD
     "name": "yUem",
     "slug": "yUem",
     "version": "1.0.0",
@@ -9,16 +8,6 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-=======
-    "name": "yUEM",
-    "slug": "yUEM",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": ".app/assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": ".app/assets/splash.png",
->>>>>>> a5d110699fe4d1d923a0f14f18302bc7630c9b0c
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -30,20 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-<<<<<<< HEAD
         "foregroundImage": "./assets/adaptive-icon.png",
-=======
-        "foregroundImage": ".app/assets/adaptive-icon.png",
->>>>>>> a5d110699fe4d1d923a0f14f18302bc7630c9b0c
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-<<<<<<< HEAD
       "favicon": "./assets/favicon.png"
-=======
-      "favicon": ".app/assets/favicon.png"
->>>>>>> a5d110699fe4d1d923a0f14f18302bc7630c9b0c
     }
   }
 }

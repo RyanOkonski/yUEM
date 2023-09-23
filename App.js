@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Bemvindo, Login, Cadastro } from './screens';
@@ -36,19 +35,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-=======
-import React from 'react';
-import { View, Text } from 'react-native';
-
-function App() {
-  return (
-    <View>
-        <View>
-            <Text>Oiii</Text>
-        </View>
-    </View>
-  );
-}
-
-export default App;
->>>>>>> a5d110699fe4d1d923a0f14f18302bc7630c9b0c
