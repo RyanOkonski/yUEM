@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, Pressable, Keyboard } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { LinearGradient } from "expo-linear-gradient";
 import { SelectList } from "react-native-dropdown-select-list";
+import axios from 'axios';
 
-const Cadastro = () => {
+const Cadastro = ({ navigation }) => {
   const genders = ["Masculino", "Feminino", "Outro"];
 
   const [selected, setSelected] = React.useState("");
@@ -61,13 +62,13 @@ const Cadastro = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      nome: "",
+      name: "",
       email: "",
-      senha: "",
-      idade: "",
-      curso: "",
-      genero: "",
-      anonimo: false,
+      password: "",
+      course: "",
+      age: "",
+      anonymous: false,
+      gender: "",
     },
   });
 
@@ -94,8 +95,33 @@ const Cadastro = () => {
     }, 2000);
   };
 
+  const [responseMessage, setResponseMessage] = useState('');
+  const postDataToApi = async (data) => {
+    const postData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      course: data.course,
+      age: parseInt(data.age),
+      anonymous: data.anonymous,
+      gender: data.gender,
+    }
+
+    try {
+      const response = await axios.post(
+        'http://25.7.138.178:8080/User/CreateUser',
+        postData
+      );
+      setResponseMessage(response.data.message);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error('Deu ruim:', error);
+    }
+    console.log("Deu bom");
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
+    postDataToApi(data);
   };
 
   return (
@@ -113,7 +139,7 @@ const Cadastro = () => {
       >
         <Text
           style={{
-            marginTop: 80,
+            marginTop: 20,
             fontSize: 50,
             fontWeight: "bold",
             color: "white",
@@ -151,7 +177,7 @@ const Cadastro = () => {
                 }}
               />
             )}
-            name="nome"
+            name="name"
           />
           {errors.nome && (
             <Text style={{ marginTop: 4, color: "red" }}>
@@ -235,7 +261,7 @@ const Cadastro = () => {
                 }}
               />
             )}
-            name="senha"
+            name="password"
           />
           {errors.senha && (
             <Text style={{ marginTop: 4, color: "red" }}>
@@ -281,7 +307,7 @@ const Cadastro = () => {
                 }}
               />
             )}
-            name="idade"
+            name="age"
           />
           {errors.idade && (
             <Text style={{ marginTop: 4, color: "red" }}>
@@ -330,7 +356,7 @@ const Cadastro = () => {
                 }}
               />
             )}
-            name="curso"
+            name="course"
           />
           {errors.curso && (
             <Text style={{ marginTop: 4, color: "red" }}>
@@ -374,7 +400,7 @@ const Cadastro = () => {
                 ))}
               </View>
             )}
-            name="genero"
+            name="gender"
           />
           {errors.genero && (
             <Text style={{ marginTop: 4, color: "red" }}>
@@ -424,7 +450,7 @@ const Cadastro = () => {
                 />
               </View>
             )}
-            name="anonimo"
+            name="anonymous"
           />
 
           <Pressable

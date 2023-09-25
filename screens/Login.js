@@ -2,8 +2,9 @@ import React from "react";
 import { Text, View, TextInput, Pressable } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { LinearGradient } from "expo-linear-gradient";
+import axios from 'axios';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const {
     control,
     handleSubmit,
@@ -15,8 +16,22 @@ const Login = () => {
     },
   });
 
+  const checkLogin = async (data) => {
+    try {
+      const url = 'http://25.7.138.178:8080/User/Login/' + data.email + "/" + data.senha;
+      const response = await axios.get(url);
+      if (response.data){
+        navigation.navigate("Home");
+      } else{
+        alert("Usuário não encontrado!");
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
+    checkLogin(data);
   };
 
   return (
