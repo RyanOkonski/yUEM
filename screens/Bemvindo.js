@@ -26,7 +26,7 @@ const Bemvindo = ({ navigation }) => {
         />
         <View
           style={{
-            top: 400,
+            top: 300,
             gap: 100,
             alignItems: 'center',
             justifyContent: 'center',
