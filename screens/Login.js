@@ -26,12 +26,13 @@ const Login = ({ navigation }) => {
         alert("Usuário não encontrado!");
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Erro na hora do GET:', error);
     }
   };
 
   const onSubmit = (data) => {
-    checkLogin(data);
+    // checkLogin(data);
+    navigation.navigate("Home");
   };
 
   return (
