@@ -3,12 +3,12 @@ import { Text, View, TextInput, Pressable, Keyboard } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { LinearGradient } from "expo-linear-gradient";
 import { SelectList } from "react-native-dropdown-select-list";
-import axios from 'axios';
+import axios from "axios";
 
 const Cadastro = ({ navigation }) => {
+  const [responseMessage, setResponseMessage] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
   const genders = ["Masculino", "Feminino", "Outro"];
-
-  const [selected, setSelected] = React.useState("");
 
   const selectList = [
     { key: "1", value: "Administração" },
@@ -95,7 +95,6 @@ const Cadastro = ({ navigation }) => {
     }, 2000);
   };
 
-  const [responseMessage, setResponseMessage] = useState('');
   const postDataToApi = async (data) => {
     const postData = {
       name: data.name,
@@ -105,23 +104,24 @@ const Cadastro = ({ navigation }) => {
       age: parseInt(data.age),
       anonymous: data.anonymous,
       gender: data.gender,
-    }
+    };
 
     try {
       const response = await axios.post(
-        'http://25.7.138.178:8080/User/CreateUser',
+        "http://25.7.138.178:8080/User/CreateUser",
         postData
       );
       setResponseMessage(response.data.message);
       navigation.navigate("Home");
     } catch (error) {
-      console.error('Deu ruim:', error);
+      console.error("Deu ruim:", error);
     }
     console.log("Deu bom");
   };
 
   const onSubmit = (data) => {
-    postDataToApi(data);
+    // postDataToApi(data);
+    console.log(data);
   };
 
   return (
@@ -139,7 +139,7 @@ const Cadastro = ({ navigation }) => {
       >
         <Text
           style={{
-            marginTop: 20,
+            marginTop: 80,
             fontSize: 50,
             fontWeight: "bold",
             color: "white",
@@ -179,7 +179,7 @@ const Cadastro = ({ navigation }) => {
             )}
             name="name"
           />
-          {errors.nome && (
+          {errors.name && (
             <Text style={{ marginTop: 4, color: "red" }}>
               Esse campo é obrigatório!
             </Text>
@@ -263,7 +263,7 @@ const Cadastro = ({ navigation }) => {
             )}
             name="password"
           />
-          {errors.senha && (
+          {errors.password && (
             <Text style={{ marginTop: 4, color: "red" }}>
               Esse campo é obrigatório!
             </Text>
@@ -309,9 +309,9 @@ const Cadastro = ({ navigation }) => {
             )}
             name="age"
           />
-          {errors.idade && (
+          {errors.age && (
             <Text style={{ marginTop: 4, color: "red" }}>
-              {errors.idade.message}
+              Esse campo é obrigatório!
             </Text>
           )}
 
@@ -329,14 +329,13 @@ const Cadastro = ({ navigation }) => {
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <SelectList
+                setSelected={setSelectedCourse}
                 onBlur={onBlur}
-                onChangeText={(itemValue) => {
-                  onChange(itemValue);
-                }}
-                setSelected={setSelected}
-                data={selectList}
+                onChangeText={onChange}
                 value={value}
+                selectedCourse={selectedCourse}
                 search={true}
+                data={selectList}
                 placeholder="Selecione uma opção"
                 boxStyles={{
                   paddingVertical: 8,
@@ -358,7 +357,7 @@ const Cadastro = ({ navigation }) => {
             )}
             name="course"
           />
-          {errors.curso && (
+          {errors.course && (
             <Text style={{ marginTop: 4, color: "red" }}>
               Esse campo é obrigatório!
             </Text>
@@ -402,7 +401,7 @@ const Cadastro = ({ navigation }) => {
             )}
             name="gender"
           />
-          {errors.genero && (
+          {errors.gender && (
             <Text style={{ marginTop: 4, color: "red" }}>
               Esse campo é obrigatório!
             </Text>
@@ -434,9 +433,7 @@ const Cadastro = ({ navigation }) => {
                   }}
                   onPress={() => onChange(true)}
                 />
-                <Text style={{ marginHorizontal: 8, color: "white" }}>
-                  Não
-                </Text>
+                <Text style={{ marginHorizontal: 8, color: "white" }}>Não</Text>
                 <Pressable
                   style={{
                     width: 20,

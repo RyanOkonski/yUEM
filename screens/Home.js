@@ -1,37 +1,28 @@
-import React, { useState } from "react";
-import { Text, View, TextInput, Pressable } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import axios from 'axios';
+import React from "react";
+import { View} from "react-native";
+import { Dimensions } from "react-native";
+import Twett from "./Twett";
+import axios from "axios";
 
-const Home = ({ navigation }) => {
+const Home = () => {
+  const windowHeight = Dimensions.get("window").height;
+
+  const user = {
+    name: "Ryan",
+    email: "gmail.com",
+    post: {
+      text: "Primeiro post",
+    }
+  }
+
   return (
-    <LinearGradient
-      style={{
-        flex: 1,
-      }}
-      colors={["#381010", "#361010"]}
-    >
-      <View
-        style={{
-          alignContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            marginTop: 200,
-            fontSize: 50,
-            fontWeight: "bold",
-            color: "white",
-            textShadowColor: "black",
-            textShadowOffset: { width: 6, height: 4 },
-            textShadowRadius: 10,
-          }}
-        >
-          Home
-        </Text>
+    <View style={{ flex: 1 }}>
+      <View style={{ backgroundColor: "#381010", height: 45 }}></View>
+      <View style={{ backgroundColor: "white", height: windowHeight / 1.11 }}>
+        <Twett twett={user}/>
       </View>
-    </LinearGradient>
+      <View style={{ backgroundColor: "#381010", height: 45 }}></View>
+    </View>
   );
 };
 
