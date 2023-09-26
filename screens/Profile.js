@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 const Profile = () => {
     return (
         <Text>
-            Hello World
+            Hello World!
         </Text>
     );
 }

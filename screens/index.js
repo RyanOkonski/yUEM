@@ -4,6 +4,7 @@ import Cadastro from "./Cadastro";
 import Home from "./Home";
 import Tweet from "./Tweet";
 import Profile from "./Profile";
+import CriarPost from "./CriarPost";
 
 export {
     Bemvindo,
@@ -12,4 +13,5 @@ export {
     Home,
     Tweet,
     Profile,
+    CriarPost,
 }

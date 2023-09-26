@@ -1,14 +1,17 @@
-import React from "react";
-import { View, FlatList, Pressable, Text, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, FlatList, Pressable, Text, Alert, ActivityIndicator } from "react-native";
 import { Dimensions } from "react-native";
 import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import tweets from "../data/tweets";
 import Tweet from "./Tweet";
-import axios from "axios";
 
 const Home = ({ navigation }) => {
   const windowHeight = Dimensions.get("window").height;
   const windowWidth = Dimensions.get("screen").width;
+
+  // const [data, setData] = useState([]);
+  // const [posts, setPosts] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   const onProfileScreen = () => {
     navigation.navigate("Profile");
@@ -16,6 +19,10 @@ const Home = ({ navigation }) => {
 
   const onSubmit = () => {
     console.log("Usar para fazer GET nas requisições");
+  };
+
+  const onCriarPost = () => {
+    navigation.navigate("CriarPost");
   };
 
   const onExitSubmit = () => {
@@ -37,6 +44,36 @@ const Home = ({ navigation }) => {
     );
   };
 
+  // useEffect(() => {
+  //   fetch('http://25.7.138.178:8080/User')
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       setData(responseData);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setLoading(false);
+  //     });
+  // }, []);
+  // useEffect(() => {
+  //   fetch('http://25.7.138.178:8080/User/GetPost')
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       setPosts(responseData);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setLoading(false);
+  //     });
+  // }, []);
+  // if (loading) {
+  //   return <ActivityIndicator size="large" style={{top: 330}} />;
+  // }
+  // console.log(data);
+  // console.log(posts);
+ 
   return (
     <View style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#381010", height: 85 }}>
@@ -45,7 +82,7 @@ const Home = ({ navigation }) => {
             position: "absolute",
             fontSize: 30,
             fontWeight: "bold",
-            color: "#1C7A2F",
+            color: "white",
             textShadowColor: "black",
             textShadowOffset: { width: 6, height: 4 },
             textShadowRadius: 10,
@@ -57,12 +94,13 @@ const Home = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ backgroundColor: "white", height: windowHeight / 1.25 }}>
-        <FlatList
-          data={tweets}
-          renderItem={({ item }) => <Tweet tweet={item} />}
-        />
+        {/* <FlatList
+          data={data}
+          posts={posts}
+          renderItem={({ item, post }) => <Tweet tweet={item} posts={post} />}
+        /> */}
         <Pressable
-          onPress={onSubmit}
+          onPress={onCriarPost}
           style={{
             position: "absolute",
             right: 20,
@@ -89,13 +127,13 @@ const Home = ({ navigation }) => {
           onPress={onProfileScreen}
           style={{ marginLeft: 34, marginTop: 15 }}
         >
-          <Ionicons name="person" size={38} color="#1C7A2F" />
+          <Ionicons name="person" size={38} color="white" />
         </Pressable>
         <Pressable onPress={onSubmit} style={{ marginTop: 10 }}>
-          <Entypo name="home" size={44} color="#1C7A2F" />
+          <Entypo name="home" size={44} color="white" />
         </Pressable>
         <Pressable onPress={onExitSubmit} style={{ marginTop: 15 }}>
-          <MaterialCommunityIcons name="exit-run" size={38} color="#1C7A2F" />
+          <MaterialCommunityIcons name="exit-run" size={38} color="white" />
         </Pressable>
       </View>
     </View>
