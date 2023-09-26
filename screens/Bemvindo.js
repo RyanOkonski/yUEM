@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, Button, Pressable } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions } from "react-native";
 
