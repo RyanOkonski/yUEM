@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, FlatList, Pressable, Text, Alert, ActivityIndicator } from "react-native";
 import { Dimensions } from "react-native";
 import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import tweets from "../data/tweets";
 import Tweet from "./Tweet";
 
-const Home = ({ navigation }) => {
+const Home = ({ route, navigation }) => {
   const windowHeight = Dimensions.get("window").height;
   const windowWidth = Dimensions.get("screen").width;
-
-  // const [data, setData] = useState([]);
-  // const [posts, setPosts] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const onProfileScreen = () => {
     navigation.navigate("Profile");
@@ -22,7 +19,8 @@ const Home = ({ navigation }) => {
   };
 
   const onCriarPost = () => {
-    navigation.navigate("CriarPost");
+    console.log(route.params);
+    navigation.navigate("CriarPost", route.params);
   };
 
   const onExitSubmit = () => {
@@ -44,35 +42,21 @@ const Home = ({ navigation }) => {
     );
   };
 
-  // useEffect(() => {
-  //   fetch('http://25.7.138.178:8080/User')
-  //     .then((response) => response.json())
-  //     .then((responseData) => {
-  //       setData(responseData);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
-  // useEffect(() => {
-  //   fetch('http://25.7.138.178:8080/User/GetPost')
-  //     .then((response) => response.json())
-  //     .then((responseData) => {
-  //       setPosts(responseData);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
-  // if (loading) {
-  //   return <ActivityIndicator size="large" style={{top: 330}} />;
-  // }
-  // console.log(data);
-  // console.log(posts);
+  useEffect(() => {
+    fetch('http://25.7.138.178:8080/User/Posts')
+      .then((response) => response.json())
+      .then((responseData) => {
+        setData(responseData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
+  if (loading) {
+    return <ActivityIndicator size="large" style={{top: (windowHeight/2)}} color="#00ff00" />;
+  }
  
   return (
     <View style={{ flex: 1 }}>
@@ -94,11 +78,10 @@ const Home = ({ navigation }) => {
         </Text>
       </View>
       <View style={{ backgroundColor: "white", height: windowHeight / 1.25 }}>
-        {/* <FlatList
+        <FlatList
           data={data}
-          posts={posts}
-          renderItem={({ item, post }) => <Tweet tweet={item} posts={post} />}
-        /> */}
+          renderItem={({item}) => <Tweet tweet={item}/>}
+        />
         <Pressable
           onPress={onCriarPost}
           style={{
