@@ -1,33 +1,17 @@
-import React from "react";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Pressable, ActivityIndicator } from "react-native";
+import { Dimensions } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
-const Tweet = ({ tweet, posts }) => {
+const Tweet = ({ tweet }) => {
   const onSubmit = () => {
     console.log("Criar a telinha para editar o post!");
   };
 
-  function anonymousVery() {
-    if (tweet.anonymous) {
-      return "Anônimo";
-    } else {
-      return tweet.name;
-    }
-  }
-
-  // function postText() {
-  //   if (tweet.id == posts.userId) {
-  //     return tweet.post;
-  //   } else {
-  //     return tweet.content;
-  //   }
-  // }
-
   return (
     <View style={styles.mainContainer}>
       <View style={{ flexDirection: "row", marginLeft: 10 }}>
-        <Text style={styles.name}>{anonymousVery()}</Text>
-        <Text style={styles.useremail}>({tweet.course})</Text>
+        <Text style={styles.name}>Anônimo</Text>
         <Pressable
           onPress={onSubmit}
           style={{
@@ -38,10 +22,10 @@ const Tweet = ({ tweet, posts }) => {
           <Entypo name="dots-three-horizontal" size={16} color="black" />
         </Pressable>
       </View>
-      <Text style={styles.content}>{tweet.age}</Text>
+      <Text style={styles.content}>{tweet.message}</Text>
       <View style={styles.footer}>
         <Entypo name="heart-outlined" size={14} color="grey" />
-        <Text style={{ color: "gray", marginLeft: 5 , fontSize: 12 }}>{tweet.age || 0}</Text>
+        <Text style={{ color: "gray", marginLeft: 5 , fontSize: 12 }}>{tweet.likePost || 0}</Text>
       </View>
     </View>
   );

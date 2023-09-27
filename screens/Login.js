@@ -20,10 +20,11 @@ const Login = ({ navigation }) => {
     try {
       const url = 'http://25.7.138.178:8080/User/Login/' + data.email + "/" + data.senha;
       const response = await axios.get(url);
-      if (response.data){
-        navigation.navigate("Home");
+      if (response.data != ""){
+        console.log(response.data);
+        navigation.navigate("Home", response.data);
       } else{
-        alert("Usuário não encontrado!");
+        alert("Cadastra-se animal!");
       }
     } catch (error) {
       console.error('Erro na hora do GET:', error);
@@ -31,8 +32,7 @@ const Login = ({ navigation }) => {
   };
 
   const onSubmit = (data) => {
-    // checkLogin(data);
-    navigation.navigate("Home");
+    checkLogin(data);
   };
 
   return (

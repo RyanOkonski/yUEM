@@ -112,16 +112,16 @@ const Cadastro = ({ navigation }) => {
         postData
       );
       setResponseMessage(response.data.message);
-      navigation.navigate("Home");
+      console.log(postData);
+      console.log("Usuário criado com sucesso!");
+      navigation.navigate("Login");
     } catch (error) {
       console.error("Deu ruim:", error);
     }
-    console.log("Deu bom");
   };
 
   const onSubmit = (data) => {
-    // postDataToApi(data);
-    console.log(data);
+    postDataToApi(data);
   };
 
   return (

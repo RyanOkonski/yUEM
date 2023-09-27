@@ -2,16 +2,30 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Pressable , StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
+import axios from 'axios';
 
-const CriarPost = ({ navigation }) => {
+const CriarPost = ({ route, navigation }) => {
+  const user_Id = route.params;
   const windowWidth = Dimensions.get("screen").width;
   const [text, setText] = useState("");
 
-  const handleSave = () => {
-    // You can handle saving the entered text here
-    console.log('Entered Text:', text);
-    // You can also navigate to another screen if needed
-    navigation.goBack(); // Navigate back to the previous screen
+  const postDataToApi = async () =>{
+    const postData = {
+      massage: String(text),
+      likePost: 0
+    };
+    console.log(postData);
+    try {
+      const url = "http://25.7.138.178:8080/User/" + user_Id + "/CreatePost";
+      await axios.post(
+        url,
+        postData,
+      );
+      console.log("Post criado com sucesso");
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("Deu ruim:", error);
+    }
   };
 
   return (
@@ -42,7 +56,7 @@ const CriarPost = ({ navigation }) => {
           multiline={true}
         />
         <Pressable
-          onPress={handleSave}
+          onPress={handleSubmit(postDataToApi)}
           multiline={true}
           style={{
             position: "absolute",
