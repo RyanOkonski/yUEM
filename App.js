@@ -1,55 +1,76 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Bemvindo, Login, Cadastro, Home, Profile, CriarPost } from './screens';
+import {
+  Bemvindo,
+  Login,
+  Cadastro,
+  Home,
+  Profile,
+  CriarPost,
+  EditarPost,
+  Tweet,
+} from "./screens";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Bemvindo'
-      >
+      <Stack.Navigator initialRouteName="Bemvindo">
         <Stack.Screen
           name="Bemvindo"
           component={Bemvindo}
           options={{
-              headerShown:false
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="Login"
           component={Login}
           options={{
-              headerShown:false
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="Cadastro"
           component={Cadastro}
           options={{
-              headerShown:false
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="Home"
           component={Home}
           options={{
-              headerShown:false
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="Profile"
           component={Profile}
           options={{
-              headerShown:false
+            headerShown: false,
           }}
         />
         <Stack.Screen
           name="CriarPost"
           component={CriarPost}
           options={{
-              headerShown:false
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Tweet"
+          component={Tweet}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="EditarPost"
+          component={EditarPost}
+          options={{
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
