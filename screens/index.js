@@ -5,6 +5,7 @@ import Home from "./Home";
 import Tweet from "./Tweet";
 import Profile from "./Profile";
 import CriarPost from "./CriarPost";
+import EditarPost from "./EditarPost";
 
 export {
     Bemvindo,
@@ -14,4 +15,5 @@ export {
     Tweet,
     Profile,
     CriarPost,
+    EditarPost,
 }

@@ -12,10 +12,12 @@ import { Entypo } from "@expo/vector-icons";
 import { Dimensions } from "react-native";
 import axios from "axios";
 
-const CriarPost = ({ route, navigation }) => {
-  const userId = route.params;
+const EditarPost = ({ route, navigation }) => {
+  const { userId } = route.params;
+  const { postId } = route.params;
+  const { message } = route.params;
   const windowWidth = Dimensions.get("screen").width;
-  const [text, setText] = useState("");
+  const [text, setText] = useState(message);
 
   const handlePressOutside = () => {
     Keyboard.dismiss();
@@ -24,16 +26,15 @@ const CriarPost = ({ route, navigation }) => {
   const postDataToApi = async () => {
     const postData = {
       message: String(text),
-      likePost: 0,
     };
-    console.log(postData);
     try {
       const url =
         "https://gnat-huge-gibbon.ngrok-free.app/User/" +
         userId +
-        "/CreatePost";
-      await axios.post(url, postData);
-      console.log("Post criado com sucesso");
+        "/UpdatePost/" +
+        postId;
+      await axios.put(url, postData);
+      console.log("Post editado com sucesso");
       navigation.navigate("Home", userId);
     } catch (error) {
       console.error("Deu ruim:", error);
@@ -56,7 +57,7 @@ const CriarPost = ({ route, navigation }) => {
             bottom: 10,
           }}
         >
-          Criar Post
+          Editar Post
         </Text>
       </View>
       <TouchableWithoutFeedback onPress={handlePressOutside}>
@@ -65,7 +66,6 @@ const CriarPost = ({ route, navigation }) => {
             style={styles.input}
             onChangeText={(newText) => setText(newText)}
             value={text}
-            placeholder="Digite seu post aqui..."
             multiline={true}
           />
           <Pressable
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CriarPost;
+export default EditarPost;
